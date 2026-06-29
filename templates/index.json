@@ -88,7 +88,9 @@
     },
     "moment_content_hAN4Wd": {
       "type": "moment-content",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/Untitled.png"
+      }
     },
     "moment_testimonials_mLE9bY": {
       "type": "moment-testimonials",
