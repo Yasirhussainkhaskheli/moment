@@ -48,6 +48,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.8rem;
+  width: 80%;
+  margin: 0 auto;
   padding: 0.8rem;
 }
 
@@ -789,4 +791,5 @@ header-drawer,
 .moment-featured__gallery:not(.moment-featured__gallery--hover-slideshow) .moment-featured__image {
   position: relative;
 }
+
 
