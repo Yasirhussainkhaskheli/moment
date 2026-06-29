@@ -1,0 +1,75 @@
+{{ 'moment.css' | asset_url | stylesheet_tag }}
+
+<section class="moment-featured" {{ section.shopify_attributes }}>
+  <div class="moment-featured__grid">
+    {%- for block in section.blocks -%}
+      <article class="moment-featured__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.link != blank -%}
+          <a class="moment-featured__link" href="{{ block.settings.link }}">
+        {%- endif -%}
+        <div class="moment-featured__image-wrap">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 900
+              | image_tag:
+                class: 'moment-featured__image',
+                widths: '300, 450, 600, 900',
+                sizes: '(min-width: 990px) 33vw, 33vw'
+            }}
+          {%- else -%}
+            <div class="moment-featured__placeholder">
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'moment-featured__placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if block.settings.link != blank -%}
+          </a>
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Moment Featured Grid",
+  "tag": "section",
+  "class": "section section-moment-featured",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Grid item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moment Featured Grid",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+{{ 'moment.css' | asset_url | stylesheet_tag }}
+
+<section class="moment-content" {{ section.shopify_attributes }}>
+  <div class="moment-content__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2000
+        | image_tag:
+          class: 'moment-content__image',
+          widths: '750, 1100, 1500, 2000',
+          sizes: '100vw'
+      }}
+    {%- else -%}
+      <div class="moment-content__placeholder">
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'moment-content__placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Moment Content Banner",
+  "tag": "section",
+  "class": "section section-moment-content",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moment Content Banner"
+    }
+  ]
+}
+{% endschema %}

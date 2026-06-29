@@ -1,75 +1,77 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "moment_hero_Tt9gQe": {
+      "type": "moment-hero",
+      "settings": {}
+    },
+    "moment_featured_gZ7JmH": {
+      "type": "moment-featured",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "item_1": { "type": "item", "settings": {} },
+        "item_2": { "type": "item", "settings": {} },
+        "item_3": { "type": "item", "settings": {} },
+        "item_4": { "type": "item", "settings": {} },
+        "item_5": { "type": "item", "settings": {} },
+        "item_6": { "type": "item", "settings": {} },
+        "item_7": { "type": "item", "settings": {} },
+        "item_8": { "type": "item", "settings": {} },
+        "item_9": { "type": "item", "settings": {} }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8",
+        "item_9"
+      ],
+      "settings": {}
+    },
+    "moment_content_hAN4Wd": {
+      "type": "moment-content",
+      "settings": {}
+    },
+    "moment_testimonials_mLE9bY": {
+      "type": "moment-testimonials",
+      "blocks": {
+        "meta_1": {
+          "type": "meta",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "label": "Price",
+            "value": "$260 USD"
           }
         },
-        "button": {
-          "type": "buttons",
+        "meta_2": {
+          "type": "meta",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "label": "Pieces",
+            "value": "Nine essentials"
+          }
+        },
+        "meta_3": {
+          "type": "meta",
+          "settings": {
+            "label": "Season",
+            "value": "Spring / Summer"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+      "block_order": ["meta_1", "meta_2", "meta_3"],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "brand": "MOMENT",
+        "title": "Collection 1",
+        "button_label": "Shop now",
+        "button_link": ""
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "moment_hero_Tt9gQe",
+    "moment_featured_gZ7JmH",
+    "moment_content_hAN4Wd",
+    "moment_testimonials_mLE9bY"
   ]
 }

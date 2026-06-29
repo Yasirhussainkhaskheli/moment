@@ -1,0 +1,241 @@
+{{ 'moment.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+{{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
+{{ 'component-swatch.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'moment.js' | asset_url }}" defer="defer"></script>
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<product-info
+  id="MomentProduct-{{ section.id }}"
+  class="moment-product color-{{ section.settings.color_scheme }}"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="true"
+  data-url="{{ product.url }}"
+>
+  <div class="page-width moment-product__wrap">
+    <div class="moment-product-layout">
+      <aside class="moment-product-layout__left">
+        <div class="moment-product-layout__sticky">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="moment-product-layout__eyebrow">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+
+          <h1 class="moment-product-layout__title">{{ product.title | escape }}</h1>
+
+          {%- if product.description != blank -%}
+            <div class="moment-product-layout__description rte">
+              {{ product.description }}
+            </div>
+          {%- elsif section.settings.fallback_description != blank -%}
+            <div class="moment-product-layout__description rte">
+              {{ section.settings.fallback_description }}
+            </div>
+          {%- endif -%}
+        </div>
+      </aside>
+
+      <div class="moment-product-layout__media">
+        <div class="moment-product-gallery">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              <div class="moment-product-gallery__item" data-media-id="{{ media.id }}">
+                {{
+                  media
+                  | image_url: width: 1800
+                  | image_tag:
+                    class: 'moment-product-gallery__image',
+                    widths: '750, 1100, 1500, 1800',
+                    sizes: '(min-width: 990px) 42vw, 100vw'
+                }}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="moment-product-gallery__item moment-product-gallery__item--placeholder">
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'moment-product-gallery__placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <aside class="moment-product-layout__right">
+        <div class="moment-product-layout__sticky">
+          <div id="price-{{ section.id }}" class="moment-product-layout__price" role="status">
+            {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
+          </div>
+
+          {%- assign product_form_id = 'moment-product-form-' | append: section.id -%}
+
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'variant_picker' -%}
+                <div class="moment-product-layout__variants" {{ block.shopify_attributes }}>
+                  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                </div>
+              {%- when 'buy_box' -%}
+                <div class="moment-product-layout__buybox" {{ block.shopify_attributes }}>
+                  <product-form class="product-form" data-section-id="{{ section.id }}">
+                    <div class="product-form__error-message-wrapper" role="alert" hidden>
+                      <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
+                      <span class="product-form__error-message"></span>
+                    </div>
+
+                    {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="{{ current_variant.id }}"
+                        {% if current_variant.available == false or current_variant == null %}
+                          disabled
+                        {% endif %}
+                        class="product-variant-id"
+                      >
+
+                      <button
+                        id="ProductSubmitButton-{{ section.id }}"
+                        type="submit"
+                        name="add"
+                        class="moment-product-layout__submit"
+                        {% if current_variant.available == false or current_variant == null %}
+                          disabled
+                        {% endif %}
+                      >
+                        <span>
+                          {%- if current_variant == null -%}
+                            {{ 'products.product.unavailable' | t }}
+                          {%- elsif current_variant.available == false -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- else -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- endif -%}
+                        </span>
+                        {%- render 'loading-spinner' -%}
+                      </button>
+                    {%- endform -%}
+                  </product-form>
+                </div>
+              {%- when 'detail' -%}
+                <details class="moment-product-layout__detail" {{ block.shopify_attributes }}>
+                  <summary class="moment-product-layout__detail-summary">
+                    <span>{{ block.settings.label }}</span>
+                    <span class="moment-product-layout__detail-arrow">+</span>
+                  </summary>
+                  <div class="moment-product-layout__detail-body rte">
+                    {{ block.settings.value }}
+                  </div>
+                </details>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </aside>
+    </div>
+  </div>
+</product-info>
+
+{% schema %}
+{
+  "name": "Moment Product Main",
+  "tag": "section",
+  "class": "section section-moment-product-main",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SHADES OF THE MOMENT"
+    },
+    {
+      "type": "richtext",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "<p>Adding a signature touch, the temples are elegantly debossed with the S.O.T.M logo, highlighting the brand's commitment to quality and distinctive design.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "label": "Picker type",
+          "options": [
+            { "value": "dropdown", "label": "Dropdown" },
+            { "value": "button", "label": "Buttons" }
+          ],
+          "default": "button"
+        },
+        {
+          "type": "select",
+          "id": "swatch_shape",
+          "label": "Swatch shape",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "circle", "label": "Circle" },
+            { "value": "square", "label": "Square" }
+          ],
+          "default": "circle"
+        }
+      ]
+    },
+    {
+      "type": "buy_box",
+      "name": "Buy box",
+      "limit": 1
+    },
+    {
+      "type": "detail",
+      "name": "Detail",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Core Instructions"
+        },
+        {
+          "type": "richtext",
+          "id": "value",
+          "label": "Value",
+          "default": "<p>Store your piece carefully and clean gently to preserve the finish.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moment Product Main",
+      "blocks": [
+        { "type": "variant_picker" },
+        { "type": "buy_box" },
+        {
+          "type": "detail",
+          "settings": {
+            "label": "Core Instructions",
+            "value": "<p>Store your piece carefully and clean gently to preserve the finish.</p>"
+          }
+        },
+        {
+          "type": "detail",
+          "settings": {
+            "label": "Delivery & Returns",
+            "value": "<p>Delivered in 3 to 5 business days with easy returns.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

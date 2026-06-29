@@ -1,0 +1,88 @@
+{{ 'moment.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign has_content = false
+  if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank or section.settings.image != blank
+    assign has_content = true
+  endif
+-%}
+
+{%- if has_content -%}
+  <section class="moment-cta" {{ section.shopify_attributes }}>
+    <div class="moment-cta__inner">
+      <div class="moment-cta__copy">
+        {%- if section.settings.title != blank -%}
+          <h2 class="moment-cta__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="moment-cta__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            class="moment-cta__button"
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% else %}
+              role="link" aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        <div class="moment-cta__media">
+          {{
+            section.settings.image
+            | image_url: width: 800
+            | image_tag:
+              class: 'moment-cta__image',
+              widths: '320, 480, 640, 800',
+              sizes: '(min-width: 990px) 32vw, 100vw'
+          }}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Moment CTA",
+  "tag": "section",
+  "class": "section section-moment-cta",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moment CTA"
+    }
+  ]
+}
+{% endschema %}
