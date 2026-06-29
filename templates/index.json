@@ -17,74 +17,12 @@
     },
     "moment_featured_gZ7JmH": {
       "type": "moment-featured",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_5": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_6": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_7": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_8": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        },
-        "item_9": {
-          "type": "item",
-          "settings": {
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4",
-        "item_5",
-        "item_6",
-        "item_7",
-        "item_8",
-        "item_9"
-      ],
-      "settings": {}
+      "settings": {
+        "collection": "all",
+        "title": "Shop the Collection",
+        "products_to_show": 9,
+        "show_view_all": true
+      }
     },
     "moment_content_hAN4Wd": {
       "type": "moment-content",

@@ -686,3 +686,88 @@
     gap: 1.6rem;
   }
 }
+
+.moment-featured__inner {
+  padding: 1.6rem 0.8rem 0.8rem;
+}
+
+.moment-featured__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 0 0.8rem 1.2rem;
+}
+
+.moment-featured__title,
+.moment-featured__product-title {
+  margin: 0;
+  color: #111111;
+}
+
+.moment-featured__title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.moment-featured__view-all {
+  color: #111111;
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.moment-featured__grid {
+  padding: 0 0.8rem;
+}
+
+.moment-featured__meta {
+  padding: 1rem 0.4rem 0.6rem;
+}
+
+.moment-featured__product-title {
+  font-family: Arial, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.moment-featured__price,
+.moment-featured__price .price,
+.moment-featured__price .price-item {
+  color: #111111;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+}
+
+.moment-featured__empty {
+  padding: 0 0.8rem 1.2rem;
+  color: #111111;
+  font-family: Arial, sans-serif;
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 749px) {
+  .moment-featured__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .moment-featured__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.header-wrapper,
+.header-wrapper.gradient {
+  background: transparent;
+  background-color: transparent;
+}
+
+.header-wrapper--border-bottom {
+  border-bottom: 0;
+}

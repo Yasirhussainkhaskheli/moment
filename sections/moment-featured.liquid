@@ -1,74 +1,108 @@
 {{ 'moment.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign featured_collection = section.settings.collection
+
+  if featured_collection == blank
+    assign featured_collection = collections['all']
+  endif
+
+  assign section_title = section.settings.title
+
+  if section_title == blank and featured_collection != blank
+    assign section_title = featured_collection.title
+  endif
+-%}
+
 <section class="moment-featured" {{ section.shopify_attributes }}>
-  <div class="moment-featured__grid">
-    {%- for block in section.blocks -%}
-      <article class="moment-featured__card" {{ block.shopify_attributes }}>
-        {%- if block.settings.link != blank -%}
-          <a class="moment-featured__link" href="{{ block.settings.link }}">
+  <div class="moment-featured__inner">
+    {%- if section_title != blank or section.settings.show_view_all -%}
+      <div class="moment-featured__header">
+        {%- if section_title != blank -%}
+          <h2 class="moment-featured__title">{{ section_title }}</h2>
         {%- endif -%}
-        <div class="moment-featured__image-wrap">
-          {%- if block.settings.image != blank -%}
-            {{
-              block.settings.image
-              | image_url: width: 900
-              | image_tag:
-                class: 'moment-featured__image',
-                widths: '300, 450, 600, 900',
-                sizes: '(min-width: 990px) 33vw, 33vw'
-            }}
-          {%- else -%}
-            <div class="moment-featured__placeholder">
-              {{ 'product-apparel-1' | placeholder_svg_tag: 'moment-featured__placeholder-svg' }}
-            </div>
-          {%- endif -%}
+
+        {%- if section.settings.show_view_all and featured_collection != blank and featured_collection.url != blank -%}
+          <a class="moment-featured__view-all" href="{{ featured_collection.url }}">View all</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="moment-featured__grid">
+      {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+        {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+          <article class="moment-featured__card">
+            <a class="moment-featured__link" href="{{ product.url }}">
+              <div class="moment-featured__image-wrap">
+                {%- if product.featured_image != blank -%}
+                  {{
+                    product.featured_image
+                    | image_url: width: 900
+                    | image_tag:
+                      class: 'moment-featured__image',
+                      widths: '300, 450, 600, 900',
+                      sizes: '(min-width: 990px) 33vw, 50vw'
+                  }}
+                {%- else -%}
+                  <div class="moment-featured__placeholder">
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'moment-featured__placeholder-svg' }}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <div class="moment-featured__meta">
+                <h3 class="moment-featured__product-title">{{ product.title }}</h3>
+                <div class="moment-featured__price">
+                  {% render 'price', product: product, price_class: 'price--compact' %}
+                </div>
+              </div>
+            </a>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="moment-featured__empty">
+          Add products to the selected collection to show them here.
         </div>
-        {%- if block.settings.link != blank -%}
-          </a>
-        {%- endif -%}
-      </article>
-    {%- endfor -%}
+      {%- endif -%}
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Moment Featured Grid",
+  "name": "Moment Featured Products",
   "tag": "section",
   "class": "section section-moment-featured",
-  "max_blocks": 12,
-  "blocks": [
+  "settings": [
     {
-      "type": "item",
-      "name": "Grid item",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        }
-      ]
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 9,
+      "label": "Products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Show view all link"
     }
   ],
   "presets": [
     {
-      "name": "Moment Featured Grid",
-      "blocks": [
-        { "type": "item" },
-        { "type": "item" },
-        { "type": "item" },
-        { "type": "item" },
-        { "type": "item" },
-        { "type": "item" },
-        { "type": "item" },
-        { "type": "item" },
-        { "type": "item" }
-      ]
+      "name": "Moment Featured Products"
     }
   ]
 }
