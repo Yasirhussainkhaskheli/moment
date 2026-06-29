@@ -1,21 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "moment_hero_Tt9gQe": {
       "type": "moment-hero",
-      "settings": {}
+      "settings": {
+        "hero_image": "shopify://shop_images/WhatsApp_Image_2026-06-26_at_8.22.32_PM.jpg"
+      }
     },
     "moment_featured_gZ7JmH": {
       "type": "moment-featured",
       "blocks": {
-        "item_1": { "type": "item", "settings": {} },
-        "item_2": { "type": "item", "settings": {} },
-        "item_3": { "type": "item", "settings": {} },
-        "item_4": { "type": "item", "settings": {} },
-        "item_5": { "type": "item", "settings": {} },
-        "item_6": { "type": "item", "settings": {} },
-        "item_7": { "type": "item", "settings": {} },
-        "item_8": { "type": "item", "settings": {} },
-        "item_9": { "type": "item", "settings": {} }
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_8": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        },
+        "item_9": {
+          "type": "item",
+          "settings": {
+            "link": ""
+          }
+        }
       },
       "block_order": [
         "item_1",
@@ -59,7 +115,11 @@
           }
         }
       },
-      "block_order": ["meta_1", "meta_2", "meta_3"],
+      "block_order": [
+        "meta_1",
+        "meta_2",
+        "meta_3"
+      ],
       "settings": {
         "brand": "MOMENT",
         "title": "Collection 1",
