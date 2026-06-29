@@ -322,6 +322,86 @@
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+    <!-- ================= CUSTOM "MOMENT" PRELOADER START ================= -->
+    <div id="moment-preloader">
+      <div class="moment-logo-container">
+        <h1 class="moment-animate-text">moment</h1>
+      </div>
+    </div>
+
+    <style>
+      /* Preloader Fullscreen Background */
+      #moment-preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #000000; /* Dark premium background - change to #ffffff if you want white */
+        z-index: 999999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      }
+
+      /* Text Styling */
+      .moment-animate-text {
+        font-family: inherit; /* Inherits your theme's sleek font */
+        font-size: 3.5rem;   /* Change text size here */
+        font-weight: 600;
+        color: #ffffff;      /* Change text color to #000000 if background is white */
+        letter-spacing: 0.15em;
+        text-transform: lowercase;
+        margin: 0;
+        padding: 0;
+        /* Running the elegant pulse and scale animation */
+        animation: momentPulse 1.8s ease-in-out infinite;
+      }
+
+      /* Premium Breathing Animation Rule */
+      @keyframes momentPulse {
+        0% {
+          transform: scale(0.95);
+          opacity: 0.4;
+          filter: blur(1px);
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 1;
+          filter: blur(0px);
+        }
+        100% {
+          transform: scale(0.95);
+          opacity: 0.4;
+          filter: blur(1px);
+        }
+      }
+
+      /* CSS Class to smoothly remove loader once site is ready */
+      #moment-preloader.loaded {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    </style>
+
+    <script>
+      // Triggers instantly when all images, CSS, and structural elements are loaded
+      window.addEventListener('load', function() {
+        var preloader = document.getElementById('moment-preloader');
+        if (preloader) {
+          // Small intentional delay for smooth professional transition feel
+          setTimeout(function() {
+            preloader.classList.add('loaded');
+          }, 600);
+        }
+      });
+    </script>
+    <!-- ================= CUSTOM "MOMENT" PRELOADER END ================= -->
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -403,3 +483,4 @@
     {%- endif -%}
   </body>
 </html>
+
