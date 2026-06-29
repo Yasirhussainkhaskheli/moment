@@ -1,4 +1,5 @@
 {{ 'moment.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'moment.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign featured_collection = section.settings.collection
@@ -6,43 +7,37 @@
   if featured_collection == blank
     assign featured_collection = collections['all']
   endif
-
-  assign section_title = section.settings.title
-
-  if section_title == blank and featured_collection != blank
-    assign section_title = featured_collection.title
-  endif
 -%}
 
 <section class="moment-featured" {{ section.shopify_attributes }}>
   <div class="moment-featured__inner">
-    {%- if section_title != blank or section.settings.show_view_all -%}
-      <div class="moment-featured__header">
-        {%- if section_title != blank -%}
-          <h2 class="moment-featured__title">{{ section_title }}</h2>
-        {%- endif -%}
-
-        {%- if section.settings.show_view_all and featured_collection != blank and featured_collection.url != blank -%}
-          <a class="moment-featured__view-all" href="{{ featured_collection.url }}">View all</a>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
     <div class="moment-featured__grid">
       {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
         {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+          {%- assign gallery_images = product.images | slice: 0, 4 -%}
           <article class="moment-featured__card">
             <a class="moment-featured__link" href="{{ product.url }}">
               <div class="moment-featured__image-wrap">
                 {%- if product.featured_image != blank -%}
-                  {{
-                    product.featured_image
-                    | image_url: width: 900
-                    | image_tag:
-                      class: 'moment-featured__image',
-                      widths: '300, 450, 600, 900',
-                      sizes: '(min-width: 990px) 33vw, 50vw'
-                  }}
+                  <div
+                    class="moment-featured__gallery{% if gallery_images.size > 1 %} moment-featured__gallery--hover-slideshow{% endif %}"
+                    {% if gallery_images.size > 1 %}
+                      data-hover-gallery
+                      data-gallery-interval="850"
+                    {% endif %}
+                  >
+                    {%- for image in gallery_images -%}
+                      {%- capture image_class -%}moment-featured__image{% if forloop.first %} is-active{% endif %}{%- endcapture -%}
+                      {{
+                        image
+                        | image_url: width: 900
+                        | image_tag:
+                          class: image_class,
+                          widths: '300, 450, 600, 900',
+                          sizes: '(min-width: 990px) 33vw, 50vw'
+                      }}
+                    {%- endfor -%}
+                  </div>
                 {%- else -%}
                   <div class="moment-featured__placeholder">
                     {{ 'product-apparel-1' | placeholder_svg_tag: 'moment-featured__placeholder-svg' }}
