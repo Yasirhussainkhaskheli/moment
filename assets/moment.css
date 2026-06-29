@@ -501,11 +501,13 @@
 .moment-product-layout__left,
 .moment-product-layout__right {
   min-width: 0;
+  position: sticky;
+  top: 2.4rem;
+  align-self: start;
 }
 
 .moment-product-layout__sticky {
-  position: sticky;
-  top: 2.4rem;
+  position: static;
 }
 
 .moment-product-layout__eyebrow,
@@ -787,3 +789,4 @@ header-drawer,
 .moment-featured__gallery:not(.moment-featured__gallery--hover-slideshow) .moment-featured__image {
   position: relative;
 }
+
