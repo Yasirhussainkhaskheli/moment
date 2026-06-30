@@ -1,0 +1,108 @@
+{{ 'moment.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'moment.js' | asset_url }}" defer="defer"></script>
+
+<section class="moment-gallery-slider" {{ section.shopify_attributes }}>
+  <div class="moment-gallery-slider__inner">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="moment-gallery-slider__copy">
+        {%- if section.settings.subheading != blank -%}
+          <p class="moment-gallery-slider__eyebrow">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="moment-gallery-slider__title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div
+      class="moment-gallery-slider__viewport"
+      data-moment-slider
+      data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+    >
+      <div class="moment-gallery-slider__track" data-slider-track>
+        {%- for block in section.blocks -%}
+          <div class="moment-gallery-slider__slide" {{ block.shopify_attributes }}>
+            <div class="moment-gallery-slider__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1200
+                  | image_tag:
+                    class: 'moment-gallery-slider__image',
+                    widths: '360, 540, 720, 900, 1200',
+                    sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw'
+                }}
+              {%- else -%}
+                <div class="moment-gallery-slider__placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'moment-gallery-slider__placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Moment Gallery Slider",
+  "tag": "section",
+  "class": "section section-moment-gallery-slider",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Gallery"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Latest moments"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay speed",
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moment Gallery Slider",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

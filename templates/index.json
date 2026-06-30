@@ -66,12 +66,40 @@
         "button_label": "Shop now",
         "button_link": ""
       }
+    },
+    "moment_gallery_slider_aQ7mLp": {
+      "type": "moment-gallery-slider",
+      "blocks": {
+        "slide_1": {
+          "type": "image",
+          "settings": {}
+        },
+        "slide_2": {
+          "type": "image",
+          "settings": {}
+        },
+        "slide_3": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "subheading": "Gallery",
+        "heading": "Latest moments",
+        "autoplay_speed": 3
+      }
     }
   },
   "order": [
     "moment_hero_Tt9gQe",
     "moment_featured_gZ7JmH",
     "moment_content_hAN4Wd",
-    "moment_testimonials_mLE9bY"
+    "moment_testimonials_mLE9bY",
+    "moment_gallery_slider_aQ7mLp"
   ]
 }
