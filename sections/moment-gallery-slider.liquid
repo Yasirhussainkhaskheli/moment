@@ -3,15 +3,11 @@
 
 <section class="moment-gallery-slider" {{ section.shopify_attributes }}>
   <div class="moment-gallery-slider__inner">
-    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
-      <div class="moment-gallery-slider__copy">
-        {%- if section.settings.subheading != blank -%}
-          <p class="moment-gallery-slider__eyebrow">{{ section.settings.subheading }}</p>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="moment-gallery-slider__title">{{ section.settings.heading }}</h2>
-        {%- endif -%}
-      </div>
+    {%- if section.settings.subheading != blank -%}
+      <p class="moment-gallery-slider__eyebrow">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="moment-gallery-slider__title">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
     <div

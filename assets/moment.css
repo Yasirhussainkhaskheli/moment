@@ -869,10 +869,6 @@ header-drawer,
   padding: 0 0.8rem;
 }
 
-.moment-gallery-slider__copy {
-  padding: 0 0.8rem 1.6rem;
-  text-align: center;
-}
 
 .moment-gallery-slider__eyebrow {
   margin: 0 0 0.6rem;
@@ -940,11 +936,9 @@ header-drawer,
     padding: 0 0.4rem;
   }
 
-  .moment-gallery-slider__copy {
-    padding: 0 0.4rem 1.2rem;
-  }
 
   .moment-gallery-slider__slide {
     padding: 0 0.4rem;
   }
 }
+
