@@ -30,6 +30,60 @@
         "image": "shopify://shop_images/Untitled.png"
       }
     },
+    "moment_gallery_slider_aQ7mLp": {
+      "type": "moment-gallery-slider",
+      "blocks": {
+        "image_yr3Agb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitleddesign_3.png"
+          }
+        },
+        "image_hNXKiw": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitleddesign_5.png"
+          }
+        },
+        "image_BgKzwC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_2_2842e309-b6a5-4066-8a8e-86e4b52c266d.png"
+          }
+        },
+        "slide_1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_4_ef33c4ab-65c3-4657-b557-5c034b51e844.png"
+          }
+        },
+        "slide_2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_6_1d967c63-c61f-401d-8245-7d19376d068f.png"
+          }
+        },
+        "slide_3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_7.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_yr3Agb",
+        "image_hNXKiw",
+        "image_BgKzwC",
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "subheading": "",
+        "heading": "",
+        "autoplay_speed": 3
+      }
+    },
     "moment_testimonials_mLE9bY": {
       "type": "moment-testimonials",
       "blocks": {
@@ -66,33 +120,6 @@
         "button_label": "Shop now",
         "button_link": ""
       }
-    },
-    "moment_gallery_slider_aQ7mLp": {
-      "type": "moment-gallery-slider",
-      "blocks": {
-        "slide_1": {
-          "type": "image",
-          "settings": {}
-        },
-        "slide_2": {
-          "type": "image",
-          "settings": {}
-        },
-        "slide_3": {
-          "type": "image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "settings": {
-        "subheading": "",
-        "heading": "",
-        "autoplay_speed": 3
-      }
     }
   },
   "order": [
@@ -103,4 +130,3 @@
     "moment_testimonials_mLE9bY"
   ]
 }
-
