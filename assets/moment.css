@@ -808,6 +808,24 @@ body:has(main[data-template="index"]) .header-wrapper.gradient {
 body:has(main[data-template="index"]) .header-wrapper--border-bottom {
   border-bottom: 0;
 }
+body:has(main[data-template="index"]) .moment-featured__link {
+  position: relative;
+}
+
+body:has(main[data-template="index"]) .moment-featured__image-wrap {
+  position: relative;
+  padding: 1.2rem 1.2rem 6.4rem;
+  align-items: flex-start;
+}
+
+body:has(main[data-template="index"]) .moment-featured__meta {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 1rem 1.2rem 1.2rem;
+}
 
 
 .header__inline-menu,
