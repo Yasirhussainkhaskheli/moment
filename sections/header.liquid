@@ -172,7 +172,9 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <div class="header__heading-logo-wrapper">
+            {{ 'moment-logo.png' | asset_url | image_tag: class: 'header__heading-logo header__heading-logo--fallback', alt: shop.name, width: 280, preload: true }}
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +217,9 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <div class="header__heading-logo-wrapper">
+            {{ 'moment-logo.png' | asset_url | image_tag: class: 'header__heading-logo header__heading-logo--fallback', alt: shop.name, width: 280, preload: true }}
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
