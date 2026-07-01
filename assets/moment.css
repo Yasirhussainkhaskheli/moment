@@ -595,7 +595,7 @@
 }
 
 .moment-product-gallery__item {
-  background: #f4f4f1;
+  background: transparent;
 }
 
 .moment-product-gallery__item--placeholder {
@@ -941,4 +941,3 @@ header-drawer,
     padding: 0 0.4rem;
   }
 }
-
