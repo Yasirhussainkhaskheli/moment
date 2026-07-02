@@ -26,6 +26,7 @@
     },
     "moment_content_hAN4Wd": {
       "type": "moment-content",
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/Untitled.png"
       }
