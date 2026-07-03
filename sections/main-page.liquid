@@ -121,7 +121,7 @@
     }
 
     .section-{{ section.id }}-contact .contact__fields {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .section-{{ section.id }}-contact .field--full {
@@ -137,8 +137,8 @@
 
   {%- if is_about_page -%}
     <div class="section-{{ section.id }}-about rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <p>Moment is a brand that embodies doing what you would like to do -- when you would like to do it.</p>
-      <p>Our pieces don't come with structures or deadlines. There is no right time, no right place, no rules on how they should be worn. You can wear them for any occasion -- because the occasion is whatever you decide it is.</p>
+      <p>Moment is a brand that embodies doing what you would like to do - when you would like to do it.</p>
+      <p>Our pieces don't come with structures or deadlines. There is no right time, no right place, no rules on how they should be worn. You can wear them for any occasion - because the occasion is whatever you decide it is.</p>
       <p>We don't believe clothing should tell you who to be. Every piece is a blank space waiting for your story, your timing, your way.</p>
       <p>You make the items.<br>Not the other way around.</p>
     </div>
@@ -149,10 +149,10 @@
     <div class="section-{{ section.id }}-contact-layout">
       <div class="section-{{ section.id }}-contact-copy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <p>We'd love to hear from you.</p>
-        <p>If you have any questions -- about your order, shipping, returns, or anything else -- you can email us at:</p>
+        <p>If you have any questions - about your order, shipping, returns, or anything else - you can email us at:</p>
         <p><a class="section-{{ section.id }}-contact-email" href="mailto:info@momentwrld.com">info@momentwrld.com</a></p>
         <p>We aim to respond to all inquiries within 1-2 business days.</p>
-        <p class="section-{{ section.id }}-contact-team">-- The Moment Team</p>
+        <p class="section-{{ section.id }}-contact-team">- The Moment Team</p>
       </div>
 
       <div class="section-{{ section.id }}-contact{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">

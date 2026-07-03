@@ -829,7 +829,6 @@ body:has(main[data-template="index"]) .moment-featured__meta {
 
 
 .header__inline-menu,
-header-drawer,
 .header__search,
 .header__icon--search {
   display: none !important;
