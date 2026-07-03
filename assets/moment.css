@@ -720,8 +720,11 @@
     gap: 2rem;
   }
 
+  .moment-product-layout__left,
+  .moment-product-layout__right,
   .moment-product-layout__sticky {
-    position: static;
+    position: static !important;
+    top: auto !important;
   }
 
   .moment-product-layout__description {
