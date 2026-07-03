@@ -34,18 +34,6 @@
     "moment_gallery_slider_aQ7mLp": {
       "type": "moment-gallery-slider",
       "blocks": {
-        "image_yr3Agb": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Untitleddesign_3.png"
-          }
-        },
-        "image_hNXKiw": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Untitleddesign_5.png"
-          }
-        },
         "image_BgKzwC": {
           "type": "image",
           "settings": {
@@ -72,8 +60,6 @@
         }
       },
       "block_order": [
-        "image_yr3Agb",
-        "image_hNXKiw",
         "image_BgKzwC",
         "slide_1",
         "slide_2",
@@ -83,44 +69,6 @@
         "subheading": "",
         "heading": "",
         "autoplay_speed": 3
-      }
-    },
-    "moment_testimonials_mLE9bY": {
-      "type": "moment-testimonials",
-      "disabled": true,
-      "blocks": {
-        "meta_1": {
-          "type": "meta",
-          "settings": {
-            "label": "Price",
-            "value": "$260 USD"
-          }
-        },
-        "meta_2": {
-          "type": "meta",
-          "settings": {
-            "label": "Pieces",
-            "value": "Nine essentials"
-          }
-        },
-        "meta_3": {
-          "type": "meta",
-          "settings": {
-            "label": "Season",
-            "value": "Spring / Summer"
-          }
-        }
-      },
-      "block_order": [
-        "meta_1",
-        "meta_2",
-        "meta_3"
-      ],
-      "settings": {
-        "brand": "MOMENT",
-        "title": "Collection 1",
-        "button_label": "Shop now",
-        "button_link": ""
       }
     }
   },
