@@ -85,6 +85,15 @@ if (!customElements.get('product-info')) {
         productForm?.handleErrorMessage();
       }
 
+      isVariantBlocked(variantId) {
+        if (!variantId || !this.dataset.blockedVariantIds) return false;
+
+        return this.dataset.blockedVariantIds
+          .split(',')
+          .map((id) => id.trim())
+          .includes(String(variantId));
+      }
+
       handleSwapProduct(productUrl, updateFullPage) {
         return (html) => {
           this.productModal?.remove();
@@ -188,6 +197,11 @@ if (!customElements.get('product-info')) {
 
           if (!variant) {
             this.setUnavailable();
+            return;
+          }
+
+          if (this.isVariantBlocked(variant.id)) {
+            this.productForm?.toggleSubmitButton(true, window.variantStrings.soldOut);
             return;
           }
 

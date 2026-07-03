@@ -8,6 +8,15 @@
 <script src="{{ 'moment.js' | asset_url }}" defer="defer"></script>
 
 {%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign blocked_variant_ids = '' -%}
+{%- if product.handle == 'moment-asphalt-duffel-bag' -%}
+  {%- assign blocked_variant_ids = '43083259871330' -%}
+{%- endif -%}
+{%- assign current_variant_id_string = current_variant.id | append: '' -%}
+{%- assign current_variant_blocked = false -%}
+{%- if blocked_variant_ids != blank and blocked_variant_ids contains current_variant_id_string -%}
+  {%- assign current_variant_blocked = true -%}
+{%- endif -%}
 
 <product-info
   id="MomentProduct-{{ section.id }}"
@@ -16,6 +25,9 @@
   data-product-id="{{ product.id }}"
   data-update-url="true"
   data-url="{{ product.url }}"
+  {% if blocked_variant_ids != blank %}
+    data-blocked-variant-ids="{{ blocked_variant_ids }}"
+  {% endif %}
 >
   <div class="page-width moment-product__wrap">
     <div class="moment-product-layout">
@@ -89,7 +101,7 @@
                         type="hidden"
                         name="id"
                         value="{{ current_variant.id }}"
-                        {% if current_variant.available == false or current_variant == null %}
+                        {% if current_variant.available == false or current_variant == null or current_variant_blocked %}
                           disabled
                         {% endif %}
                         class="product-variant-id"
@@ -100,14 +112,14 @@
                         type="submit"
                         name="add"
                         class="moment-product-layout__submit"
-                        {% if current_variant.available == false or current_variant == null %}
+                        {% if current_variant.available == false or current_variant == null or current_variant_blocked %}
                           disabled
                         {% endif %}
                       >
                         <span>
                           {%- if current_variant == null -%}
                             {{ 'products.product.unavailable' | t }}
-                          {%- elsif current_variant.available == false -%}
+                          {%- elsif current_variant.available == false or current_variant_blocked -%}
                             {{ 'products.product.sold_out' | t }}
                           {%- else -%}
                             {{ 'products.product.add_to_cart' | t }}
