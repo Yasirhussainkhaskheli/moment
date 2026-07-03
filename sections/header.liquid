@@ -74,6 +74,36 @@
       padding-top: 0.5rem;
     }
   }
+
+  .moment-header-nav {
+    display: none;
+  }
+
+  @media screen and (min-width: 990px) {
+    .moment-header-nav {
+      display: block;
+      justify-self: center;
+    }
+
+    .moment-header-nav__list {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.4rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .moment-header-nav__link {
+      color: #111111;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+  }
 </style>
 
 {%- style -%}
@@ -226,6 +256,15 @@
         </h1>
       {%- endif -%}
     {%- endif -%}
+
+    <nav class="moment-header-nav" aria-label="Primary">
+      <ul class="moment-header-nav__list" role="list">
+        <li><a class="moment-header-nav__link" href="{{ routes.root_url }}">Home</a></li>
+        <li><a class="moment-header-nav__link" href="/pages/about">About Us</a></li>
+        <li><a class="moment-header-nav__link" href="{{ routes.all_products_collection_url }}">Shop</a></li>
+        <li><a class="moment-header-nav__link" href="/pages/contact">Contact Us</a></li>
+      </ul>
+    </nav>
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       <div class="desktop-localization-wrapper">
