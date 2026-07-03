@@ -164,12 +164,16 @@
       isAnimating = false;
     });
 
-    slider.addEventListener('mouseenter', clearAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
-    slider.addEventListener('focusin', clearAutoplay);
-    slider.addEventListener('focusout', (event) => {
-      if (!slider.contains(event.relatedTarget)) startAutoplay();
-    });
+    const canHoverSlider = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (canHoverSlider) {
+      slider.addEventListener('mouseenter', clearAutoplay);
+      slider.addEventListener('mouseleave', startAutoplay);
+      slider.addEventListener('focusin', clearAutoplay);
+      slider.addEventListener('focusout', (event) => {
+        if (!slider.contains(event.relatedTarget)) startAutoplay();
+      });
+    }
 
     window.addEventListener('resize', () => {
       window.clearTimeout(resizeTimeout);
