@@ -134,13 +134,41 @@
 
   @media screen and (max-width: 749px) {
     #product-grid.moment-collection-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr);
       gap: 0.4rem;
       padding: 0.4rem;
     }
 
+    #product-grid.moment-collection-grid .moment-featured__link {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
     #product-grid.moment-collection-grid .moment-featured__image-wrap {
-      padding: 0.8rem 0.8rem 5.6rem;
+      padding: 0.8rem;
+    }
+
+    #product-grid.moment-collection-grid .moment-featured__meta {
+      position: static;
+      inset: auto;
+      width: 100%;
+      padding: 0.8rem 1.2rem 1.2rem;
+    }
+
+    #product-grid.moment-collection-grid .moment-featured__product-title {
+      width: 100%;
+      font-size: 1.15rem;
+      line-height: 1.35;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    #product-grid.moment-collection-grid .moment-featured__price,
+    #product-grid.moment-collection-grid .moment-featured__price .price,
+    #product-grid.moment-collection-grid .moment-featured__price .price-item {
+      font-size: 1.05rem;
+      line-height: 1.3;
     }
   }
 {%- endstyle -%}
