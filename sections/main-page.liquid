@@ -2,33 +2,37 @@
 
 {%- liquid
   assign current_path = request.path | downcase
+  assign normalized_path = current_path | replace: '/pages/', '' | replace: '/', ''
+  assign normalized_handle = page.handle | default: normalized_path | downcase
+  assign normalized_title = page.title | handleize
+
   assign is_about_page = false
-  if page.handle == 'about' or page.handle == 'about-us' or page.title | downcase == 'about' or current_path == '/about' or current_path == '/about/' or current_path == '/pages/about' or current_path == '/pages/about/'
+  if normalized_handle == 'about' or normalized_handle == 'about-us' or normalized_title == 'about' or normalized_title == 'about-us'
     assign is_about_page = true
   endif
 
   assign is_contact_page = false
-  if page.handle == 'contact' or page.handle == 'contact-us' or page.title | downcase contains 'contact' or current_path == '/contact' or current_path == '/contact/' or current_path == '/pages/contact' or current_path == '/pages/contact/'
+  if normalized_handle == 'contact' or normalized_handle == 'contact-us' or normalized_title == 'contact' or normalized_title == 'contact-us'
     assign is_contact_page = true
   endif
 
   assign is_shipping_page = false
-  if page.handle == 'shipping-policy' or current_path == '/pages/shipping-policy' or current_path == '/pages/shipping-policy/'
+  if normalized_handle == 'shipping-policy' or normalized_title == 'shipping-policy'
     assign is_shipping_page = true
   endif
 
   assign is_returns_page = false
-  if page.handle == 'returns-refunds-policy' or current_path == '/pages/returns-refunds-policy' or current_path == '/pages/returns-refunds-policy/'
+  if normalized_handle == 'returns-refunds-policy' or normalized_title == 'returns-refunds-policy'
     assign is_returns_page = true
   endif
 
   assign is_terms_page = false
-  if page.handle == 'terms-of-service' or current_path == '/pages/terms-of-service' or current_path == '/pages/terms-of-service/'
+  if normalized_handle == 'terms-of-service' or normalized_title == 'terms-of-service'
     assign is_terms_page = true
   endif
 
   assign is_privacy_page = false
-  if page.handle == 'privacy-policy' or current_path == '/pages/privacy-policy' or current_path == '/pages/privacy-policy/'
+  if normalized_handle == 'privacy-policy' or normalized_title == 'privacy-policy'
     assign is_privacy_page = true
   endif
 -%}
@@ -133,8 +137,8 @@
 
   {%- if is_about_page -%}
     <div class="section-{{ section.id }}-about rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <p>Moment is a brand that embodies doing what you would like to do — when you would like to do it.</p>
-      <p>Our pieces don't come with structures or deadlines. There is no right time, no right place, no rules on how they should be worn. You can wear them for any occasion — because the occasion is whatever you decide it is.</p>
+      <p>Moment is a brand that embodies doing what you would like to do -- when you would like to do it.</p>
+      <p>Our pieces don't come with structures or deadlines. There is no right time, no right place, no rules on how they should be worn. You can wear them for any occasion -- because the occasion is whatever you decide it is.</p>
       <p>We don't believe clothing should tell you who to be. Every piece is a blank space waiting for your story, your timing, your way.</p>
       <p>You make the items.<br>Not the other way around.</p>
     </div>
@@ -145,10 +149,10 @@
     <div class="section-{{ section.id }}-contact-layout">
       <div class="section-{{ section.id }}-contact-copy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <p>We'd love to hear from you.</p>
-        <p>If you have any questions — about your order, shipping, returns, or anything else — you can email us at:</p>
+        <p>If you have any questions -- about your order, shipping, returns, or anything else -- you can email us at:</p>
         <p><a class="section-{{ section.id }}-contact-email" href="mailto:info@momentwrld.com">info@momentwrld.com</a></p>
-        <p>We aim to respond to all inquiries within 1–2 business days.</p>
-        <p class="section-{{ section.id }}-contact-team">— The Moment Team</p>
+        <p>We aim to respond to all inquiries within 1-2 business days.</p>
+        <p class="section-{{ section.id }}-contact-team">-- The Moment Team</p>
       </div>
 
       <div class="section-{{ section.id }}-contact{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -256,7 +260,7 @@
     <div class="section-{{ section.id }}-policy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <p>Thank you for shopping with Moment.</p>
       <h2>Processing Time</h2>
-      <p>All Moment products are premade and ready to ship. Please allow 24–48 hours for your order to be processed and shipped after purchase.</p>
+      <p>All Moment products are premade and ready to ship. Please allow 24-48 hours for your order to be processed and shipped after purchase.</p>
       <p>Orders placed on weekends or holidays will begin processing on the next business day.</p>
       <h2>Shipping Carriers</h2>
       <p>All orders are shipped through UPS and DHL. Once your order ships, you will receive a confirmation email with your tracking number so you can follow your package every step of the way.</p>
