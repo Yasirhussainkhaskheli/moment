@@ -727,6 +727,18 @@
     top: auto !important;
   }
 
+  .moment-product-layout__left {
+    order: 1;
+  }
+
+  .moment-product-layout__right {
+    order: 2;
+  }
+
+  .moment-product-layout__media {
+    order: 3;
+  }
+
   .moment-product-layout__description {
     max-width: none;
   }
