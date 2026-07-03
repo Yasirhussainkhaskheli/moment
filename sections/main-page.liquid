@@ -11,6 +11,26 @@
   if page.handle == 'contact' or page.handle == 'contact-us' or page.title | downcase contains 'contact' or current_path == '/contact' or current_path == '/contact/' or current_path == '/pages/contact' or current_path == '/pages/contact/'
     assign is_contact_page = true
   endif
+
+  assign is_shipping_page = false
+  if page.handle == 'shipping-policy' or current_path == '/pages/shipping-policy' or current_path == '/pages/shipping-policy/'
+    assign is_shipping_page = true
+  endif
+
+  assign is_returns_page = false
+  if page.handle == 'returns-refunds-policy' or current_path == '/pages/returns-refunds-policy' or current_path == '/pages/returns-refunds-policy/'
+    assign is_returns_page = true
+  endif
+
+  assign is_terms_page = false
+  if page.handle == 'terms-of-service' or current_path == '/pages/terms-of-service' or current_path == '/pages/terms-of-service/'
+    assign is_terms_page = true
+  endif
+
+  assign is_privacy_page = false
+  if page.handle == 'privacy-policy' or current_path == '/pages/privacy-policy' or current_path == '/pages/privacy-policy/'
+    assign is_privacy_page = true
+  endif
 -%}
 
 {%- style -%}
@@ -28,7 +48,8 @@
   }
 
   .section-{{ section.id }}-about,
-  .section-{{ section.id }}-contact-copy {
+  .section-{{ section.id }}-contact-copy,
+  .section-{{ section.id }}-policy {
     font-family: Arial, sans-serif;
     font-size: 1.55rem;
     line-height: 1.75;
@@ -36,8 +57,24 @@
   }
 
   .section-{{ section.id }}-about p,
-  .section-{{ section.id }}-contact-copy p {
+  .section-{{ section.id }}-contact-copy p,
+  .section-{{ section.id }}-policy p,
+  .section-{{ section.id }}-policy li {
     margin: 0 0 1.8rem;
+  }
+
+  .section-{{ section.id }}-policy h2,
+  .section-{{ section.id }}-policy h3 {
+    margin: 3rem 0 1.2rem;
+    font-family: Arial, sans-serif;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    color: #111111;
+  }
+
+  .section-{{ section.id }}-policy ul {
+    margin: 0 0 2rem 2rem;
+    padding: 0;
   }
 
   .section-{{ section.id }}-contact-layout {
@@ -214,6 +251,68 @@
           </div>
         {%- endform -%}
       </div>
+    </div>
+  {%- elsif is_shipping_page -%}
+    <div class="section-{{ section.id }}-policy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <p>Thank you for shopping with Moment.</p>
+      <h2>Processing Time</h2>
+      <p>All Moment products are premade and ready to ship. Please allow 24–48 hours for your order to be processed and shipped after purchase.</p>
+      <p>Orders placed on weekends or holidays will begin processing on the next business day.</p>
+      <h2>Shipping Carriers</h2>
+      <p>All orders are shipped through UPS and DHL. Once your order ships, you will receive a confirmation email with your tracking number so you can follow your package every step of the way.</p>
+      <h2>Delivery Times</h2>
+      <p>Delivery times vary depending on your location and the carrier's service in your area. Please note that once your package is in the carrier's hands, delivery timelines are determined by UPS or DHL and may be affected by factors outside of our control, such as weather or carrier delays.</p>
+      <h2>Incorrect Shipping Information</h2>
+      <p>Please double-check your shipping address at checkout. Moment is not responsible for orders shipped to an incorrect address provided by the customer.</p>
+    </div>
+  {%- elsif is_returns_page -%}
+    <div class="section-{{ section.id }}-policy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <p>At Moment, every product is carefully inspected before it ships. Because of the nature of our products, all sales are final.</p>
+      <h2>No Refund Policy</h2>
+      <p>We do not offer refunds, returns, or exchanges unless your item arrives defective or damaged.</p>
+      <h2>Defective or Damaged Items</h2>
+      <p>If you receive a defective or damaged item, please contact us at info@momentwrld.com within 7 days of delivery with the following:</p>
+      <ul>
+        <li>Your order number</li>
+        <li>A description of the defect or damage</li>
+        <li>Clear photos of the item and its packaging</li>
+      </ul>
+      <p>Once we review and approve your claim, we will offer a replacement or refund for the defective item. Claims submitted after 7 days of delivery may not be eligible.</p>
+      <h2>Non-Qualifying Issues</h2>
+      <p>The following do not qualify as defects:</p>
+      <ul>
+        <li>Minor variations in color due to screen settings</li>
+        <li>Damage caused by wear, misuse, or improper care after delivery</li>
+        <li>Change of mind or ordering the wrong item/size</li>
+      </ul>
+      <h2>Return Shipping</h2>
+      <p>If a return is approved for a defective item, we will provide instructions for returning the item and cover the return shipping costs.</p>
+    </div>
+  {%- elsif is_terms_page -%}
+    <div class="section-{{ section.id }}-policy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <p><strong>Last updated:</strong> July 2, 2026</p>
+      <p>Welcome to Moment. These Terms of Service ("Terms") govern your use of our website, momentwrld.com (the "Site"), and any purchases you make through it. By accessing the Site or placing an order, you agree to these Terms. If you do not agree, please do not use the Site.</p>
+      <h2>1. General</h2>
+      <p>Moment ("we," "us," or "our") operates this Site to sell premade products directly to customers. We reserve the right to update or modify these Terms at any time without prior notice. Your continued use of the Site after changes are posted constitutes acceptance of the revised Terms.</p>
+      <h2>2. Eligibility</h2>
+      <p>By using this Site, you confirm that you are at least 18 years of age, or that you are using the Site under the supervision of a parent or legal guardian.</p>
+      <h2>3. Products &amp; Availability</h2>
+      <p>All products sold on this Site are premade. Product images are for illustration; slight variations in color or appearance may occur. We reserve the right to limit quantities, discontinue products at any time, or refuse any order placed through the Site.</p>
+    </div>
+  {%- elsif is_privacy_page -%}
+    <div class="section-{{ section.id }}-policy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <p><strong>Last updated:</strong> July 2, 2026</p>
+      <p>Moment ("we," "us," or "our") respects your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you visit momentwrld.com (the "Site") or make a purchase from us.</p>
+      <h2>1. Information We Collect</h2>
+      <p><strong>Information you provide:</strong> When you place an order or contact us, we collect information such as your name, email address, shipping address, billing address, and payment information.</p>
+      <p><strong>Information collected automatically:</strong> When you browse the Site, we may automatically collect certain information about your device, including your IP address, browser type, time zone, and cookies installed on your device, as well as information about how you interact with the Site.</p>
+      <h2>2. How We Use Your Information</h2>
+      <p>We use your information to:</p>
+      <ul>
+        <li>Process and fulfill your orders, including shipping confirmations and tracking updates</li>
+        <li>Communicate with you about your order or respond to inquiries</li>
+        <li>Screen orders for potential risk or fraud</li>
+      </ul>
     </div>
   {%- else -%}
     <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">

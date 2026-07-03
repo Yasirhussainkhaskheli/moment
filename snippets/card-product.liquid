@@ -29,6 +29,50 @@
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}
+  {%- if product_view_context == 'collection' -%}
+    {%- assign gallery_images = card_product.images | slice: 0, 4 -%}
+    <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
+      <article class="moment-featured__card moment-collection-card">
+        <a class="moment-featured__link" href="{{ card_product.url }}">
+          <div class="moment-featured__image-wrap">
+            {%- if card_product.featured_media -%}
+              <div
+                class="moment-featured__gallery{% if gallery_images.size > 1 %} moment-featured__gallery--hover-slideshow{% endif %}"
+                {% if gallery_images.size > 1 %}
+                  data-hover-gallery
+                  data-gallery-interval="850"
+                {% endif %}
+              >
+                {%- for image in gallery_images -%}
+                  {%- capture image_class -%}moment-featured__image{% if forloop.first %} is-active{% endif %}{%- endcapture -%}
+                  {{
+                    image
+                    | image_url: width: 900
+                    | image_tag:
+                      class: image_class,
+                      widths: '300, 450, 600, 900',
+                      sizes: '(min-width: 990px) 33vw, 50vw',
+                      loading: lazy_load | default: 'lazy'
+                  }}
+                {%- endfor -%}
+              </div>
+            {%- else -%}
+              <div class="moment-featured__placeholder">
+                {{ 'product-apparel-1' | placeholder_svg_tag: 'moment-featured__placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="moment-featured__meta">
+            <h3 class="moment-featured__product-title">{{ card_product.title | escape }}</h3>
+            <div class="moment-featured__price">
+              {% render 'price', product: card_product, price_class: 'price--compact' %}
+            </div>
+          </div>
+        </a>
+      </article>
+    </product-component>
+  {%- else -%}
   {%- liquid
     assign ratio = 1
     if card_product.featured_media and media_aspect_ratio == 'portrait'
@@ -571,6 +615,7 @@
       </div>
     </div>
   </product-component>
+  {%- endif -%}
 {%- else -%}
   {%- liquid
     assign ratio = 1
