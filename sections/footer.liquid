@@ -24,15 +24,8 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign about_url = section.settings.about_link
-  if about_url == blank
-    assign about_url = '/pages/about'
-  endif
-
-  assign contact_url = section.settings.contact_link
-  if contact_url == blank
-    assign contact_url = '/pages/contact'
-  endif
+  assign about_url = '/about'
+  assign contact_url = '/contact'
 -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
@@ -43,9 +36,9 @@
           {%- if settings.logo != blank -%}
             {{
               settings.logo
-              | image_url: width: section.settings.logo_width | image_tag:
+              | image_url: width: settings.logo_width | image_tag:
                 widths: '120, 180, 240, 320, 420',
-                width: section.settings.logo_width,
+                width: settings.logo_width,
                 loading: 'lazy',
                 class: 'moment-footer__logo',
                 alt: shop.name
@@ -86,20 +79,17 @@
       <div class="moment-footer__column">
         <p class="moment-footer__eyebrow">{{ section.settings.legal_heading }}</p>
         <ul class="moment-footer__nav list-unstyled" role="list">
-          {%- if section.settings.show_policy -%}
-            {%- for policy in shop.policies -%}
-              {%- if policy != blank -%}
-                <li>
-                  <a class="moment-footer__link" href="{{ policy.url }}">{{ policy.title | escape }}</a>
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endif -%}
           <li>
-            <a class="moment-footer__link" href="{{ about_url }}">{{ section.settings.about_label }}</a>
+            <a class="moment-footer__link" href="/pages/shipping-policy">Shipping policy</a>
           </li>
           <li>
-            <a class="moment-footer__link" href="{{ contact_url }}">{{ section.settings.contact_label }}</a>
+            <a class="moment-footer__link" href="/pages/returns-refunds-policy">Returns &amp; Refunds Policy</a>
+          </li>
+          <li>
+            <a class="moment-footer__link" href="/policies/terms-of-service">Terms of Service</a>
+          </li>
+          <li>
+            <a class="moment-footer__link" href="/policies/privacy-policy">Privacy Policy</a>
           </li>
         </ul>
       </div>

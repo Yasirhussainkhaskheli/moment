@@ -1,13 +1,14 @@
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  assign current_path = request.path | downcase
   assign is_about_page = false
-  if page.handle == 'about' or page.title | downcase == 'about'
+  if page.handle == 'about' or page.handle == 'about-us' or page.title | downcase == 'about' or current_path == '/about' or current_path == '/about/'
     assign is_about_page = true
   endif
 
   assign is_contact_page = false
-  if page.handle == 'contact' or page.handle == 'contact-us' or page.title | downcase contains 'contact'
+  if page.handle == 'contact' or page.handle == 'contact-us' or page.title | downcase contains 'contact' or current_path == '/contact' or current_path == '/contact/'
     assign is_contact_page = true
   endif
 -%}
@@ -26,8 +27,36 @@
     color: #111111;
   }
 
+  .section-{{ section.id }}-about,
+  .section-{{ section.id }}-contact-copy {
+    font-family: Arial, sans-serif;
+    font-size: 1.55rem;
+    line-height: 1.75;
+    color: #111111;
+  }
+
+  .section-{{ section.id }}-about p,
+  .section-{{ section.id }}-contact-copy p {
+    margin: 0 0 1.8rem;
+  }
+
+  .section-{{ section.id }}-contact-layout {
+    display: grid;
+    gap: 3.2rem;
+    align-items: start;
+  }
+
   .section-{{ section.id }}-contact {
-    margin-top: 3.2rem;
+    margin-top: 0;
+  }
+
+  .section-{{ section.id }}-contact-email {
+    color: #111111;
+    text-decoration: none;
+  }
+
+  .section-{{ section.id }}-contact-team {
+    margin-top: 2.4rem;
   }
 
   .section-{{ section.id }}-contact .contact__fields {
@@ -45,6 +74,11 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
 
+    .section-{{ section.id }}-contact-layout {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 5.6rem;
+    }
+
     .section-{{ section.id }}-contact .contact__fields {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -59,116 +93,131 @@
   <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>
-  <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
-  </div>
 
   {%- if is_about_page -%}
+    <div class="section-{{ section.id }}-about rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <p>Moment is a brand that embodies doing what you would like to do — when you would like to do it.</p>
+      <p>Our pieces don't come with structures or deadlines. There is no right time, no right place, no rules on how they should be worn. You can wear them for any occasion — because the occasion is whatever you decide it is.</p>
+      <p>We don't believe clothing should tell you who to be. Every piece is a blank space waiting for your story, your timing, your way.</p>
+      <p>You make the items.<br>Not the other way around.</p>
+    </div>
     <div class="section-{{ section.id }}-signature{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       Moment
     </div>
-  {%- endif -%}
+  {%- elsif is_contact_page -%}
+    <div class="section-{{ section.id }}-contact-layout">
+      <div class="section-{{ section.id }}-contact-copy rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <p>We'd love to hear from you.</p>
+        <p>If you have any questions — about your order, shipping, returns, or anything else — you can email us at:</p>
+        <p><a class="section-{{ section.id }}-contact-email" href="mailto:info@momentwrld.com">info@momentwrld.com</a></p>
+        <p>We aim to respond to all inquiries within 1–2 business days.</p>
+        <p class="section-{{ section.id }}-contact-team">— The Moment Team</p>
+      </div>
 
-  {%- if is_contact_page and template.suffix != 'contact' -%}
-    <div class="section-{{ section.id }}-contact{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      {%- form 'contact', id: 'ContactFormMainPage', class: 'contact isolate' -%}
-        {%- if form.posted_successfully? -%}
-          <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
-            {{- 'icon-success.svg' | inline_asset_content -}}
-            {{ 'templates.contact.form.post_success' | t }}
-          </h2>
-        {%- elsif form.errors -%}
-          <div class="form__message">
-            <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
-              {{- 'icon-error.svg' | inline_asset_content -}}
-              {{ 'templates.contact.form.error_heading' | t }}
+      <div class="section-{{ section.id }}-contact{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- form 'contact', id: 'ContactFormMainPage', class: 'contact isolate' -%}
+          {%- if form.posted_successfully? -%}
+            <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+              {{- 'icon-success.svg' | inline_asset_content -}}
+              {{ 'templates.contact.form.post_success' | t }}
             </h2>
-          </div>
-        {%- endif -%}
+          {%- elsif form.errors -%}
+            <div class="form__message">
+              <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+                {{- 'icon-error.svg' | inline_asset_content -}}
+                {{ 'templates.contact.form.error_heading' | t }}
+              </h2>
+            </div>
+          {%- endif -%}
 
-        <div class="contact__fields">
-          <div class="field">
-            <input
-              class="field__input"
-              autocomplete="name"
-              type="text"
-              id="ContactFormMainPage-name"
-              name="contact[{{ 'templates.contact.form.name' | t }}]"
-              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-              placeholder="{{ 'templates.contact.form.name' | t }}"
-            >
-            <label class="field__label" for="ContactFormMainPage-name">{{ 'templates.contact.form.name' | t }}</label>
-          </div>
+          <div class="contact__fields">
+            <div class="field">
+              <input
+                class="field__input"
+                autocomplete="name"
+                type="text"
+                id="ContactFormMainPage-name"
+                name="contact[{{ 'templates.contact.form.name' | t }}]"
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                placeholder="{{ 'templates.contact.form.name' | t }}"
+              >
+              <label class="field__label" for="ContactFormMainPage-name">{{ 'templates.contact.form.name' | t }}</label>
+            </div>
 
-          <div class="field field--with-error">
-            <input
-              autocomplete="email"
-              type="email"
-              id="ContactFormMainPage-email"
-              class="field__input"
-              name="contact[email]"
-              spellcheck="false"
-              autocapitalize="off"
-              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-              aria-required="true"
-              {% if form.errors contains 'email' %}
-                aria-invalid="true"
-                aria-describedby="ContactFormMainPage-email-error"
-              {% endif %}
-              placeholder="{{ 'templates.contact.form.email' | t }}"
-            >
-            <label class="field__label" for="ContactFormMainPage-email">
-              {{- 'templates.contact.form.email' | t }}
-              <span aria-hidden="true">*</span>
-            </label>
-            {%- if form.errors contains 'email' -%}
-              <small class="contact__field-error" id="ContactFormMainPage-email-error">
-                <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
-                <span class="form__message">
-                  <span class="svg-wrapper">
-                    {{- 'icon-error.svg' | inline_asset_content -}}
+            <div class="field field--with-error">
+              <input
+                autocomplete="email"
+                type="email"
+                id="ContactFormMainPage-email"
+                class="field__input"
+                name="contact[email]"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactFormMainPage-email-error"
+                {% endif %}
+                placeholder="{{ 'templates.contact.form.email' | t }}"
+              >
+              <label class="field__label" for="ContactFormMainPage-email">
+                {{- 'templates.contact.form.email' | t }}
+                <span aria-hidden="true">*</span>
+              </label>
+              {%- if form.errors contains 'email' -%}
+                <small class="contact__field-error" id="ContactFormMainPage-email-error">
+                  <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                  <span class="form__message">
+                    <span class="svg-wrapper">
+                      {{- 'icon-error.svg' | inline_asset_content -}}
+                    </span>
+                    {{- form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email -}}
                   </span>
-                  {{- form.errors.translated_fields.email | capitalize }}
-                  {{ form.errors.messages.email -}}
-                </span>
-              </small>
-            {%- endif -%}
+                </small>
+              {%- endif -%}
+            </div>
+
+            <div class="field">
+              <input
+                type="tel"
+                id="ContactFormMainPage-phone"
+                class="field__input"
+                autocomplete="tel"
+                name="contact[{{ 'templates.contact.form.phone' | t }}]"
+                pattern="[0-9\-]*"
+                value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                placeholder="{{ 'templates.contact.form.phone' | t }}"
+              >
+              <label class="field__label" for="ContactFormMainPage-phone">{{ 'templates.contact.form.phone' | t }}</label>
+            </div>
+
+            <div class="field field--full">
+              <textarea
+                rows="10"
+                id="ContactFormMainPage-body"
+                class="text-area field__input"
+                name="contact[{{ 'templates.contact.form.comment' | t }}]"
+                placeholder="{{ 'templates.contact.form.comment' | t }}"
+              >{{- form.body -}}</textarea>
+              <label class="form__label field__label" for="ContactFormMainPage-body">
+                {{- 'templates.contact.form.comment' | t -}}
+              </label>
+            </div>
           </div>
 
-          <div class="field">
-            <input
-              type="tel"
-              id="ContactFormMainPage-phone"
-              class="field__input"
-              autocomplete="tel"
-              name="contact[{{ 'templates.contact.form.phone' | t }}]"
-              pattern="[0-9\-]*"
-              value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-              placeholder="{{ 'templates.contact.form.phone' | t }}"
-            >
-            <label class="field__label" for="ContactFormMainPage-phone">{{ 'templates.contact.form.phone' | t }}</label>
+          <div class="contact__button">
+            <button type="submit" class="button">
+              {{ 'templates.contact.form.send' | t }}
+            </button>
           </div>
-
-          <div class="field field--full">
-            <textarea
-              rows="10"
-              id="ContactFormMainPage-body"
-              class="text-area field__input"
-              name="contact[{{ 'templates.contact.form.comment' | t }}]"
-              placeholder="{{ 'templates.contact.form.comment' | t }}"
-            >{{- form.body -}}</textarea>
-            <label class="form__label field__label" for="ContactFormMainPage-body">
-              {{- 'templates.contact.form.comment' | t -}}
-            </label>
-          </div>
-        </div>
-
-        <div class="contact__button">
-          <button type="submit" class="button">
-            {{ 'templates.contact.form.send' | t }}
-          </button>
-        </div>
-      {%- endform -%}
+        {%- endform -%}
+      </div>
+    </div>
+  {%- else -%}
+    <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ page.content }}
     </div>
   {%- endif -%}
 </div>

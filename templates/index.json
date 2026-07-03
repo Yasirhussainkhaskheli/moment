@@ -87,6 +87,7 @@
     },
     "moment_testimonials_mLE9bY": {
       "type": "moment-testimonials",
+      "disabled": true,
       "blocks": {
         "meta_1": {
           "type": "meta",
