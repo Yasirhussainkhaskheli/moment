@@ -3,12 +3,12 @@
 {%- liquid
   assign current_path = request.path | downcase
   assign is_about_page = false
-  if page.handle == 'about' or page.handle == 'about-us' or page.title | downcase == 'about' or current_path == '/about' or current_path == '/about/'
+  if page.handle == 'about' or page.handle == 'about-us' or page.title | downcase == 'about' or current_path == '/about' or current_path == '/about/' or current_path == '/pages/about' or current_path == '/pages/about/'
     assign is_about_page = true
   endif
 
   assign is_contact_page = false
-  if page.handle == 'contact' or page.handle == 'contact-us' or page.title | downcase contains 'contact' or current_path == '/contact' or current_path == '/contact/'
+  if page.handle == 'contact' or page.handle == 'contact-us' or page.title | downcase contains 'contact' or current_path == '/contact' or current_path == '/contact/' or current_path == '/pages/contact' or current_path == '/pages/contact/'
     assign is_contact_page = true
   endif
 -%}
