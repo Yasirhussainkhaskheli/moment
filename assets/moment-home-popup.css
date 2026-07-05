@@ -1,0 +1,168 @@
+.moment-home-popup[hidden] {
+  display: none !important;
+}
+
+.moment-home-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+}
+
+.moment-home-popup__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+}
+
+.moment-home-popup__dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem;
+}
+
+.moment-home-popup__content {
+  position: relative;
+  width: min(100%, 52rem);
+  padding: 3.2rem 2.4rem 2.4rem;
+  background: #ffffff;
+  color: #111111;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.22);
+}
+
+.moment-home-popup__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 4rem;
+  height: 4rem;
+  border: 0;
+  background: transparent;
+  color: #111111;
+  font-size: 3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.moment-home-popup__heading {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.moment-home-popup__subheading {
+  margin: 0.8rem 0 2rem;
+  font-family: Arial, sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.moment-home-popup__form {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.moment-home-popup__fields {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.moment-home-popup__fields input[type='email'],
+.moment-home-popup__fields input[type='tel'] {
+  width: 100%;
+  min-height: 4.8rem;
+  padding: 1.2rem 1.4rem;
+  border: 0.1rem solid #111111;
+  border-radius: 0;
+  background: #ffffff;
+  color: #111111;
+  font-family: Arial, sans-serif;
+  font-size: 1.4rem;
+}
+
+.moment-home-popup__fields input::placeholder {
+  color: #666666;
+}
+
+.moment-home-popup__consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: start;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.moment-home-popup__consent input {
+  margin-top: 0.2rem;
+}
+
+.moment-home-popup__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 4.8rem;
+  padding: 1.2rem 1.8rem;
+  border: 0.1rem solid #111111;
+  background: #111111;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.moment-home-popup__button[disabled] {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.moment-home-popup .wp-password-page__message {
+  min-height: 2rem;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.moment-home-popup .wp-password-page__message.is-success {
+  color: #0f7a34;
+}
+
+.moment-home-popup .wp-password-page__message.is-error {
+  color: #b42318;
+}
+
+body.moment-home-popup-open {
+  overflow: hidden;
+}
+
+@media screen and (max-width: 749px) {
+  .moment-home-popup__dialog {
+    padding: 1.6rem;
+  }
+
+  .moment-home-popup__content {
+    width: 100%;
+    padding: 2.8rem 1.6rem 1.8rem;
+  }
+
+  .moment-home-popup__heading {
+    font-size: 2rem;
+  }
+}
+.moment-home-popup .wp-password-page__button.is-loading {
+  opacity: 0.85;
+}

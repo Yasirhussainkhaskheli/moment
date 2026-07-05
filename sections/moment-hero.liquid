@@ -1,4 +1,7 @@
 {{ 'moment.css' | asset_url | stylesheet_tag }}
+{{ 'moment-home-popup.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'moment-home-popup.js' | asset_url }}" defer></script>
 
 {%- liquid
   assign hero_image = section.settings.hero_image
@@ -23,6 +26,55 @@
       </div>
     {%- endif -%}
   </div>
+
+  {%- if request.page_type == 'index' -%}
+    <div class="moment-home-popup" data-home-popup hidden>
+      <div class="moment-home-popup__backdrop" data-home-popup-close></div>
+      <div
+        class="moment-home-popup__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="MomentHomePopupTitle"
+      >
+        <button
+          class="moment-home-popup__close"
+          type="button"
+          aria-label="Close subscription popup"
+          data-home-popup-close
+        >
+          &times;
+        </button>
+
+        <div class="moment-home-popup__content">
+          <h2 id="MomentHomePopupTitle" class="moment-home-popup__heading">COMING SOON</h2>
+          <p class="moment-home-popup__subheading">PRIVATE EARLY ACCESS</p>
+
+          <form
+            class="wp-password-page__form moment-home-popup__form"
+            data-wp-signup-form
+            data-klaviyo-public-key="Y7tdFJ"
+            data-klaviyo-list-id="UTdr5F"
+          >
+            <div class="wp-password-page__fields moment-home-popup__fields" data-wp-fields>
+              <input type="email" name="email" placeholder="Email Address" autocomplete="email" required>
+              <input type="tel" name="phone" placeholder="Phone Number e.g. +923001234567" autocomplete="tel" required>
+
+              <label class="wp-password-page__consent moment-home-popup__consent">
+                <input type="checkbox" required>
+                <span>I agree to receive recurring automated marketing text messages. Consent is not a condition of purchase. Msg & data rates may apply.</span>
+              </label>
+            </div>
+
+            <button class="wp-password-page__button moment-home-popup__button" type="submit" data-wp-submit-button>
+              Subscribe Now
+            </button>
+
+            <div class="wp-password-page__message" data-wp-message aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
