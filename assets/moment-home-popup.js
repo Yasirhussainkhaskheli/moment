@@ -24,7 +24,7 @@
   openTimer = window.setTimeout(() => {
     openPopup();
     openTimer = null;
-  }, 3000);
+  }, 5000);
 
   popup.querySelectorAll('[data-home-popup-close]').forEach((element) => {
     element.addEventListener('click', () => {
