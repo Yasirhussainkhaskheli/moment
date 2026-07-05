@@ -86,7 +86,7 @@
       }
 
       if (phone && !isValidPhoneWithCountryCode(phone)) {
-        message.textContent = 'Please enter your phone number with country code, e.g. +923001234567.';
+        message.textContent = 'Please enter your phone number with country code, e.g. +12125551234.';
         message.classList.add('is-error');
         return;
       }
