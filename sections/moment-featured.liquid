@@ -13,7 +13,8 @@
   <div class="moment-featured__inner">
     <div class="moment-featured__grid">
       {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
-        {%- for product in featured_collection.products | sort: 'created_at' | reverse limit: section.settings.products_to_show -%}
+        {%- assign sorted_products = featured_collection.products | sort: 'published_at' | reverse -%}
+        {%- for product in sorted_products limit: section.settings.products_to_show -%}
           {%- assign gallery_images = product.images | slice: 0, 4 -%}
           <article class="moment-featured__card">
             <a class="moment-featured__link" href="{{ product.url }}">
