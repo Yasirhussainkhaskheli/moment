@@ -260,8 +260,7 @@ if (!customElements.get('product-info')) {
         if (!baseTitle) return;
 
         const titleFromVariant = this.getVariantTitleLabel(variant, baseTitle);
-        const nextTitle = titleFromVariant || baseTitle;
-        titleElement.textContent = nextTitle;
+        titleElement.textContent = titleFromVariant || baseTitle;
       }
 
       getVariantTitleLabel(variant, baseTitle) {
@@ -285,7 +284,10 @@ if (!customElements.get('product-info')) {
 
         const fallbackTitle = variant?.title;
         if (fallbackTitle && fallbackTitle !== 'Default Title') {
-          return fallbackTitle;
+          const normalizedFallback = fallbackTitle.trim().toLowerCase();
+          if (normalizedFallback.includes(baseTitle.trim().toLowerCase())) {
+            return fallbackTitle;
+          }
         }
 
         return null;

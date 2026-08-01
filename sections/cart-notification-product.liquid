@@ -17,12 +17,19 @@
           <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
         {%- endif -%}
         <div class="cart-notification-product__title">
-          <h3 class="cart-notification-product__name h4">
-            {%- assign notification_title = item.product.title | escape -%}
-            {%- if item.variant.title != blank and item.variant.title != 'Default Title' -%}
-              {%- assign notification_title = item.variant.title | escape -%}
+          {%- assign cart_display_title = item.product.title | escape -%}
+          {%- for option in item.options_with_values -%}
+            {%- assign option_value = option.value | downcase -%}
+            {%- if option_value == 'blue' or option_value == 'midnight blue' -%}
+              {%- assign cart_display_title = 'Moment Midnight Blue Cardholder' -%}
+            {%- elsif option_value == 'orange' or option_value == 'saffron orange' -%}
+              {%- assign cart_display_title = 'Moment Saffron Orange Cardholder' -%}
+            {%- elsif option_value == 'green' or option_value == 'emerald green' -%}
+              {%- assign cart_display_title = 'Moment Emerald Green Cardholder' -%}
             {%- endif -%}
-            {{- notification_title -}}
+          {%- endfor -%}
+          <h3 class="cart-notification-product__name h4">
+            {{- cart_display_title -}}
           </h3>
           {% assign modal_id = 'CartDisclosureModal-notification-' | append: item.key | replace: ':', '-' %}
           {%- render 'cart-disclosure-indicator', product: item.product, modal_id: modal_id -%}
