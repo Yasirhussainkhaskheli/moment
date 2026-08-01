@@ -259,13 +259,9 @@ if (!customElements.get('product-info')) {
         const baseTitle = titleElement.dataset.baseTitle || titleElement.textContent?.trim();
         if (!baseTitle) return;
 
-        const variantLabel = this.getVariantTitleLabel(variant, baseTitle);
-        if (!variantLabel) {
-          titleElement.textContent = baseTitle;
-          return;
-        }
-
-        titleElement.textContent = variantLabel;
+        const titleFromVariant = this.getVariantTitleLabel(variant, baseTitle);
+        const nextTitle = titleFromVariant || baseTitle;
+        titleElement.textContent = nextTitle;
       }
 
       getVariantTitleLabel(variant, baseTitle) {
@@ -277,14 +273,14 @@ if (!customElements.get('product-info')) {
           const colorLabel = colorOption.trim();
           const normalizedColor = colorLabel.toLowerCase();
 
-          if (normalizedColor === 'blue') return `${baseTitle.replace(/^moment\s+/i, '')} Midnight Blue`;
-          if (normalizedColor === 'orange') return `${baseTitle.replace(/^moment\s+/i, '')} Saffron Orange`;
-          if (normalizedColor === 'green') return `${baseTitle.replace(/^moment\s+/i, '')} Emerald Green`;
-          if (normalizedColor === 'midnight blue') return `${baseTitle.replace(/^moment\s+/i, '')} Midnight Blue`;
-          if (normalizedColor === 'saffron orange') return `${baseTitle.replace(/^moment\s+/i, '')} Saffron Orange`;
-          if (normalizedColor === 'emerald green') return `${baseTitle.replace(/^moment\s+/i, '')} Emerald Green`;
+          if (normalizedColor === 'blue') return `${baseTitle} Midnight Blue`;
+          if (normalizedColor === 'orange') return `${baseTitle} Saffron Orange`;
+          if (normalizedColor === 'green') return `${baseTitle} Emerald Green`;
+          if (normalizedColor === 'midnight blue') return `${baseTitle} Midnight Blue`;
+          if (normalizedColor === 'saffron orange') return `${baseTitle} Saffron Orange`;
+          if (normalizedColor === 'emerald green') return `${baseTitle} Emerald Green`;
 
-          return `${baseTitle.replace(/^moment\s+/i, '')} ${colorLabel}`;
+          return `${baseTitle} ${colorLabel}`;
         }
 
         const fallbackTitle = variant?.title;
