@@ -273,20 +273,19 @@ if (!customElements.get('product-info')) {
           const colorLabel = colorOption.trim();
           const normalizedColor = colorLabel.toLowerCase();
 
-          if (normalizedColor === 'blue') return `${baseTitle} Midnight Blue`;
-          if (normalizedColor === 'orange') return `${baseTitle} Saffron Orange`;
-          if (normalizedColor === 'green') return `${baseTitle} Emerald Green`;
-          if (normalizedColor === 'midnight blue') return `${baseTitle} Midnight Blue`;
-          if (normalizedColor === 'saffron orange') return `${baseTitle} Saffron Orange`;
-          if (normalizedColor === 'emerald green') return `${baseTitle} Emerald Green`;
+          if (normalizedColor === 'blue') return `Moment Midnight Blue Cardholder`;
+          if (normalizedColor === 'orange') return `Moment Saffron Orange Cardholder`;
+          if (normalizedColor === 'green') return `Moment Emerald Green Cardholder`;
+          if (normalizedColor === 'midnight blue') return `Moment Midnight Blue Cardholder`;
+          if (normalizedColor === 'saffron orange') return `Moment Saffron Orange Cardholder`;
+          if (normalizedColor === 'emerald green') return `Moment Emerald Green Cardholder`;
 
           return `${baseTitle} ${colorLabel}`;
         }
 
         const fallbackTitle = variant?.title;
         if (fallbackTitle && fallbackTitle !== 'Default Title') {
-          const normalizedFallback = fallbackTitle.trim().toLowerCase();
-          if (normalizedFallback.includes(baseTitle.trim().toLowerCase())) return fallbackTitle;
+          return fallbackTitle;
         }
 
         return null;
