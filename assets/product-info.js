@@ -269,32 +269,28 @@ if (!customElements.get('product-info')) {
       }
 
       getVariantTitleLabel(variant, baseTitle) {
-        const fallbackTitle = variant?.title;
-        if (fallbackTitle && fallbackTitle !== 'Default Title') {
-          if (baseTitle && fallbackTitle.includes(baseTitle)) return fallbackTitle;
-          if (baseTitle && fallbackTitle.includes(baseTitle.replace(/^Moment\s+/i, ''))) return fallbackTitle;
-        }
-
         const colorOption = ['option1', 'option2', 'option3']
           .map((key) => variant?.[key])
           .find((value) => this.isColorLabel(value));
 
         if (colorOption) {
           const colorLabel = colorOption.trim();
-          if (/^midnight/i.test(colorLabel)) {
-            return `${baseTitle} Midnight ${colorLabel.replace(/^midnight\s+/i, '')}`;
-          }
-          if (/^saffron/i.test(colorLabel)) {
-            return `${baseTitle} Saffron ${colorLabel.replace(/^saffron\s+/i, '')}`;
-          }
-          if (/^emerald/i.test(colorLabel)) {
-            return `${baseTitle} Emerald ${colorLabel.replace(/^emerald\s+/i, '')}`;
-          }
+          const normalizedColor = colorLabel.toLowerCase();
+
+          if (normalizedColor === 'blue') return `${baseTitle} Midnight Blue`;
+          if (normalizedColor === 'orange') return `${baseTitle} Saffron Orange`;
+          if (normalizedColor === 'green') return `${baseTitle} Emerald Green`;
+          if (normalizedColor === 'midnight blue') return `${baseTitle} Midnight Blue`;
+          if (normalizedColor === 'saffron orange') return `${baseTitle} Saffron Orange`;
+          if (normalizedColor === 'emerald green') return `${baseTitle} Emerald Green`;
+
           return `${baseTitle} ${colorLabel}`;
         }
 
+        const fallbackTitle = variant?.title;
         if (fallbackTitle && fallbackTitle !== 'Default Title') {
-          return `${baseTitle} ${fallbackTitle}`;
+          const normalizedFallback = fallbackTitle.trim().toLowerCase();
+          if (normalizedFallback.includes(baseTitle.trim().toLowerCase())) return fallbackTitle;
         }
 
         return null;
