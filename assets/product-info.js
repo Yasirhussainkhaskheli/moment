@@ -328,6 +328,23 @@ if (!customElements.get('product-info')) {
           });
         }
 
+        const customGallery = this.querySelector('.moment-product-gallery');
+        if (customGallery) {
+          const galleryItems = Array.from(customGallery.querySelectorAll('.moment-product-gallery__item'));
+          if (galleryItems.length) {
+            galleryItems.forEach((item) => item.classList.remove('is-active'));
+            const matchingMedia = galleryItems.find(
+              (item) => String(item.dataset.mediaId) === String(variantFeaturedMediaId)
+            );
+            const activeItem = matchingMedia || galleryItems[0];
+            activeItem?.classList.add('is-active');
+
+            if (customGallery.firstElementChild !== activeItem) {
+              customGallery.prepend(activeItem);
+            }
+          }
+        }
+
         // set featured media as active in the media gallery
         this.querySelector(`media-gallery`)?.setActiveMedia?.(
           `${this.dataset.section}-${variantFeaturedMediaId}`,

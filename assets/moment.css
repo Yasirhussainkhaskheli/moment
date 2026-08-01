@@ -598,6 +598,10 @@
   background: transparent;
 }
 
+.moment-product-gallery__item.is-active {
+  order: -1;
+}
+
 .moment-product-gallery__item--placeholder {
   min-height: 54rem;
   display: flex;

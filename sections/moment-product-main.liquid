@@ -55,7 +55,7 @@
         <div class="moment-product-gallery">
           {%- if product.media.size > 0 -%}
             {%- for media in product.media -%}
-              <div class="moment-product-gallery__item" data-media-id="{{ media.id }}">
+              <div class="moment-product-gallery__item{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}">
                 {{
                   media
                   | image_url: width: 1800
