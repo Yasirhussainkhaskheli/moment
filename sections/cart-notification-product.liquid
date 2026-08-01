@@ -18,7 +18,11 @@
         {%- endif -%}
         <div class="cart-notification-product__title">
           <h3 class="cart-notification-product__name h4">
-            {{- item.product.title | escape -}}
+            {%- assign notification_title = item.product.title | escape -%}
+            {%- if item.variant.title != blank and item.variant.title != 'Default Title' -%}
+              {%- assign notification_title = item.variant.title | escape -%}
+            {%- endif -%}
+            {{- notification_title -}}
           </h3>
           {% assign modal_id = 'CartDisclosureModal-notification-' | append: item.key | replace: ':', '-' %}
           {%- render 'cart-disclosure-indicator', product: item.product, modal_id: modal_id -%}

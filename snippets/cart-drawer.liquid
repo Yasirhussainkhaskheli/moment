@@ -154,7 +154,11 @@
 
                           <div class="cart-item__title">
                             <a href="{{ item.url }}" class="cart-item__name h4 break">
-                              {{- item.product.title | escape -}}
+                              {%- assign cart_title = item.product.title | escape -%}
+                              {%- if item.variant.title != blank and item.variant.title != 'Default Title' -%}
+                                {%- assign cart_title = item.variant.title | escape -%}
+                              {%- endif -%}
+                              {{- cart_title -}}
                             </a>
                             {%- assign cart_disclosure_modal_id = 'CartDisclosureModal-drawer-' | append: item.key | replace: ':', '-' -%}
                             {%- render 'cart-disclosure-indicator',
