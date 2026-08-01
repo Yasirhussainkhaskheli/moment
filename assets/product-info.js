@@ -259,6 +259,12 @@ if (!customElements.get('product-info')) {
         const baseTitle = titleElement.dataset.baseTitle || titleElement.textContent?.trim();
         if (!baseTitle) return;
 
+        const productId = this.dataset.productId;
+        if (String(productId) !== '7752335304650') {
+          titleElement.textContent = baseTitle;
+          return;
+        }
+
         const titleFromVariant = this.getVariantTitleLabel(variant, baseTitle);
         titleElement.textContent = titleFromVariant || baseTitle;
       }
