@@ -260,7 +260,7 @@ if (!customElements.get('product-info')) {
         if (!baseTitle) return;
 
         const productId = this.dataset.productId;
-        if (String(productId) !== '7752335304650') {
+        if (String(productId) !== '7758198014050') {
           titleElement.textContent = baseTitle;
           return;
         }
