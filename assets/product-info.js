@@ -206,6 +206,7 @@ if (!customElements.get('product-info')) {
           }
 
           this.updateMedia(html, variant?.featured_media?.id);
+          this.updateProductTitle(variant);
 
           const updateSourceFromDestination = (id, shouldHide = (source) => false) => {
             const source = html.getElementById(`${id}-${this.sectionId}`);
@@ -249,6 +250,80 @@ if (!customElements.get('product-info')) {
           input.value = variantId ?? '';
           input.dispatchEvent(new Event('change', { bubbles: true }));
         });
+      }
+
+      updateProductTitle(variant) {
+        const titleElement = this.querySelector('.moment-product-layout__title');
+        if (!titleElement) return;
+
+        const baseTitle = titleElement.dataset.baseTitle || titleElement.textContent?.trim();
+        if (!baseTitle) return;
+
+        const variantLabel = this.getVariantTitleLabel(variant, baseTitle);
+        if (!variantLabel) {
+          titleElement.textContent = baseTitle;
+          return;
+        }
+
+        titleElement.textContent = variantLabel;
+      }
+
+      getVariantTitleLabel(variant, baseTitle) {
+        const fallbackTitle = variant?.title;
+        if (fallbackTitle && fallbackTitle !== 'Default Title') {
+          if (baseTitle && fallbackTitle.includes(baseTitle)) return fallbackTitle;
+          if (baseTitle && fallbackTitle.includes(baseTitle.replace(/^Moment\s+/i, ''))) return fallbackTitle;
+        }
+
+        const colorOption = ['option1', 'option2', 'option3']
+          .map((key) => variant?.[key])
+          .find((value) => this.isColorLabel(value));
+
+        if (colorOption) {
+          const colorLabel = colorOption.trim();
+          if (/^midnight/i.test(colorLabel)) {
+            return `${baseTitle} Midnight ${colorLabel.replace(/^midnight\s+/i, '')}`;
+          }
+          if (/^saffron/i.test(colorLabel)) {
+            return `${baseTitle} Saffron ${colorLabel.replace(/^saffron\s+/i, '')}`;
+          }
+          if (/^emerald/i.test(colorLabel)) {
+            return `${baseTitle} Emerald ${colorLabel.replace(/^emerald\s+/i, '')}`;
+          }
+          return `${baseTitle} ${colorLabel}`;
+        }
+
+        if (fallbackTitle && fallbackTitle !== 'Default Title') {
+          return `${baseTitle} ${fallbackTitle}`;
+        }
+
+        return null;
+      }
+
+      isColorLabel(value) {
+        if (!value || typeof value !== 'string') return false;
+
+        const normalized = value.trim().toLowerCase();
+        return [
+          'blue',
+          'orange',
+          'green',
+          'black',
+          'white',
+          'red',
+          'yellow',
+          'pink',
+          'purple',
+          'gray',
+          'grey',
+          'silver',
+          'gold',
+          'brown',
+          'beige',
+          'navy',
+          'teal',
+          'cream',
+        ].includes(normalized);
       }
 
       updateURL(url, variantId) {

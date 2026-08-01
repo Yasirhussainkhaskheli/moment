@@ -37,7 +37,7 @@
             <p class="moment-product-layout__eyebrow">{{ section.settings.eyebrow }}</p>
           {%- endif -%}
 
-          <h1 class="moment-product-layout__title">{{ product.title | escape }}</h1>
+          <h1 class="moment-product-layout__title" data-base-title="{{ product.title | escape }}">{{ product.title | escape }}</h1>
 
           {%- if product.description != blank -%}
             <div class="moment-product-layout__description rte">
