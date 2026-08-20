@@ -595,6 +595,8 @@
 }
 
 .moment-product-gallery__item {
+  position: relative;
+  overflow: hidden;
   background: transparent;
 }
 
@@ -614,6 +616,20 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+.moment-product-gallery__image {
+  transition: transform 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .moment-product-gallery__item[data-zoom-image] {
+    cursor: zoom-in;
+  }
+
+  .moment-product-gallery__item.is-zoomed .moment-product-gallery__image {
+    transform: scale(1.8);
+  }
 }
 
 .moment-product-layout__price {

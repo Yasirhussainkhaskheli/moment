@@ -183,3 +183,30 @@
     buildSlider();
   });
 })();
+(() => {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!canHover) return;
+
+  const zoomItems = document.querySelectorAll('[data-zoom-image]');
+
+  zoomItems.forEach((item) => {
+    const image = item.querySelector('img');
+    if (!image) return;
+
+    item.addEventListener('mouseenter', () => {
+      item.classList.add('is-zoomed');
+    });
+
+    item.addEventListener('mousemove', (event) => {
+      const rect = item.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      image.style.transformOrigin = `${x}% ${y}%`;
+    });
+
+    item.addEventListener('mouseleave', () => {
+      item.classList.remove('is-zoomed');
+      image.style.transformOrigin = '';
+    });
+  });
+})();
