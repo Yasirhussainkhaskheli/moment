@@ -39,7 +39,13 @@
   });
 
   const cleanPhoneNumber = (phone) => {
-    return phone.trim().replace(/[^\d+]/g, '');
+    const cleaned = phone.trim().replace(/[^\d+]/g, '');
+
+    if (!cleaned || cleaned.startsWith('+')) return cleaned;
+
+    if (cleaned.length === 10) return `+1${cleaned}`;
+
+    return `+${cleaned}`;
   };
 
   const isValidPhoneWithCountryCode = (phone) => {
