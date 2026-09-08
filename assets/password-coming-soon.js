@@ -111,9 +111,9 @@
                 type: 'profile',
                 attributes: {
                   email: email,
+                  ...(phone ? { phone_number: phone } : {}),
                   properties: {
                     source: 'Coming Soon Page',
-                    phone_collected: phone,
                     sms_consent_collected: smsConsent,
                     signup_page: window.location.pathname,
                     signup_url: window.location.href
@@ -123,7 +123,16 @@
                       marketing: {
                         consent: 'SUBSCRIBED'
                       }
-                    }
+                    },
+                    ...(phone && smsConsent === 'yes'
+                      ? {
+                          sms: {
+                            marketing: {
+                              consent: 'SUBSCRIBED'
+                            }
+                          }
+                        }
+                      : {})
                   }
                 }
               }
