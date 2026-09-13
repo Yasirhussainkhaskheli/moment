@@ -91,6 +91,15 @@
   margin-top: 0.2rem;
 }
 
+.moment-footer__social {
+  margin-top: 1.6rem;
+}
+
+.moment-footer__social .list-social {
+  justify-content: flex-start;
+  margin: -1.1rem;
+}
+
 .moment-footer__eyebrow {
   margin: 0 0 1.6rem;
   color: #6b6b6b;

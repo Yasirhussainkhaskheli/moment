@@ -1,5 +1,6 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .footer {
@@ -51,6 +52,12 @@
         {%- if section.settings.about_text != blank -%}
           <div class="moment-footer__about rte">
             {{ section.settings.about_text }}
+          </div>
+        {%- endif -%}
+
+        {%- if settings.social_instagram_link != blank -%}
+          <div class="moment-footer__social">
+            {%- render 'social-icons' -%}
           </div>
         {%- endif -%}
       </div>
