@@ -1,6 +1,7 @@
 {{ 'moment.css' | asset_url | stylesheet_tag }}
 {{ 'moment-home-popup.css' | asset_url | stylesheet_tag }}
 
+<script src="{{ 'klaviyo-subscribe.js' | asset_url }}" defer></script>
 <script src="{{ 'moment-home-popup.js' | asset_url }}" defer></script>
 
 {%- liquid
@@ -52,8 +53,11 @@
           <form
             class="wp-password-page__form moment-home-popup__form"
             data-wp-signup-form
-            data-klaviyo-public-key="Y7tdFJ"
-            data-klaviyo-list-id="UTdr5F"
+            data-klaviyo-public-key="{{ section.settings.klaviyo_public_key }}"
+            data-klaviyo-list-id="{{ section.settings.klaviyo_list_id }}"
+            data-klaviyo-phone-list-id="{{ section.settings.klaviyo_phone_list_id }}"
+            data-klaviyo-custom-source="Shopify Homepage Popup"
+            data-klaviyo-source-label="Homepage Popup"
           >
             <div class="wp-password-page__fields moment-home-popup__fields" data-wp-fields>
               <input type="email" name="email" placeholder="Email Address" autocomplete="email" required>
@@ -91,6 +95,25 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_public_key",
+      "label": "Klaviyo Public Key / Site ID",
+      "default": "Y7tdFJ"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "Klaviyo Email List ID (e.g. Moment.wrld)",
+      "default": "Xrb3Xf",
+      "info": "Email signups are added to this list."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_phone_list_id",
+      "label": "Klaviyo Phone/SMS List ID (optional, e.g. Moment.wrld)",
+      "info": "Optional. If set, phone number signups are added to this separate list instead of the email list above. Leave blank to keep email and phone together in the list above."
     }
   ],
   "presets": [
