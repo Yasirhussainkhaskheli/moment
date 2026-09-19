@@ -260,7 +260,8 @@ if (!customElements.get('product-info')) {
         if (!baseTitle) return;
 
         const productId = this.dataset.productId;
-        if (String(productId) !== '7758198014050') {
+        const productHandle = this.dataset.productHandle;
+        if (productHandle !== 'moment-emerald-cardholder' && String(productId) !== '7758198014050') {
           titleElement.textContent = baseTitle;
           return;
         }
@@ -278,12 +279,17 @@ if (!customElements.get('product-info')) {
           const colorLabel = colorOption.trim();
           const normalizedColor = colorLabel.toLowerCase();
 
-          if (normalizedColor === 'blue') return `Moment Midnight Blue Cardholder`;
-          if (normalizedColor === 'orange') return `Moment Saffron Orange Cardholder`;
-          if (normalizedColor === 'green') return `Moment Emerald Green Cardholder`;
-          if (normalizedColor === 'midnight blue') return `Moment Midnight Blue Cardholder`;
-          if (normalizedColor === 'saffron orange') return `Moment Saffron Orange Cardholder`;
-          if (normalizedColor === 'emerald green') return `Moment Emerald Green Cardholder`;
+          const cardholderTitles = {
+            blue: 'Moment Midnight Blue Cardholder',
+            'midnight blue': 'Moment Midnight Blue Cardholder',
+            orange: 'Moment Saffron Orange Cardholder',
+            'saffron orange': 'Moment Saffron Orange Cardholder',
+            green: 'Moment Emerald Green Cardholder',
+            'emerald green': 'Moment Emerald Green Cardholder',
+            pink: 'Moment Pink Cardholder',
+          };
+
+          if (cardholderTitles[normalizedColor]) return cardholderTitles[normalizedColor];
 
           return `${baseTitle} ${colorLabel}`;
         }

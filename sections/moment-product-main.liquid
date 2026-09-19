@@ -8,6 +8,21 @@
 <script src="{{ 'moment.js' | asset_url }}" defer="defer"></script>
 
 {%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_display_title = product.title -%}
+{%- if product.handle == 'moment-emerald-cardholder' -%}
+  {%- for option_value in current_variant.options -%}
+    {%- assign normalized_option_value = option_value | downcase -%}
+    {%- if normalized_option_value == 'blue' or normalized_option_value == 'midnight blue' -%}
+      {%- assign product_display_title = 'Moment Midnight Blue Cardholder' -%}
+    {%- elsif normalized_option_value == 'orange' or normalized_option_value == 'saffron orange' -%}
+      {%- assign product_display_title = 'Moment Saffron Orange Cardholder' -%}
+    {%- elsif normalized_option_value == 'green' or normalized_option_value == 'emerald green' -%}
+      {%- assign product_display_title = 'Moment Emerald Green Cardholder' -%}
+    {%- elsif normalized_option_value == 'pink' -%}
+      {%- assign product_display_title = 'Moment Pink Cardholder' -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 {%- assign blocked_variant_ids = '' -%}
 {%- if product.handle == 'moment-asphalt-duffel-bag' -%}
   {%- assign blocked_variant_ids = '43083259871330' -%}
@@ -23,6 +38,7 @@
   class="moment-product color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
+  data-product-handle="{{ product.handle }}"
   data-update-url="true"
   data-url="{{ product.url }}"
   {% if blocked_variant_ids != blank %}
@@ -37,7 +53,7 @@
             <p class="moment-product-layout__eyebrow">{{ section.settings.eyebrow }}</p>
           {%- endif -%}
 
-          <h1 class="moment-product-layout__title" data-base-title="{{ product.title | escape }}">{{ product.title | escape }}</h1>
+          <h1 class="moment-product-layout__title" data-base-title="{{ product.title | escape }}">{{ product_display_title | escape }}</h1>
 
           {%- if product.description != blank -%}
             <div class="moment-product-layout__description rte">
